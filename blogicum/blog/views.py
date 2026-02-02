@@ -1,18 +1,16 @@
-import datetime
+from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from blog.models import Category, Post
 
 POST_COUTN = 5
 
 
-def set_published_post(querry_set):
-    return (
-        querry_set.
-        filter(
-            is_published=True,
-            category__is_published=True,
-            pub_date__lte=datetime.datetime.now()
-        ))
+def set_published_post(querry_set):  
+    return querry_set.filter(
+        is_published=True,
+        category__is_published=True,
+        pub_date__lte=timezone.now()  
+    )
 
 
 def index(request):

@@ -33,13 +33,12 @@ class Category(Published):
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'Категории'
+        ordering = ('title',) 
 
     def __str__(self):
         return f'{self.title[:25]}'
 
-
 class Location(Published):
-
     name = models.CharField(
         max_length=256,
         verbose_name='Название места')
@@ -47,10 +46,10 @@ class Location(Published):
     class Meta:
         verbose_name = 'местоположение'
         verbose_name_plural = 'Местоположения'
+        ordering = ('name',) 
 
     def __str__(self):
         return f'{self.name[:25]}'
-
 
 class Post(Published):
     title = models.CharField(
@@ -65,7 +64,8 @@ class Post(Published):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        verbose_name='Автор публикации')
+        verbose_name='Автор публикации',
+        related_name='posts')
     location = models.ForeignKey(
         Location,
         on_delete=models.SET_NULL,
