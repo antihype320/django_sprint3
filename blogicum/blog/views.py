@@ -6,7 +6,7 @@ POST_COUTN = 5
 
 
 def set_published_post(querry_set):  
-    return querry_set.filter(
+    return querry_set.select_related('category', 'author', 'location').filter(
         is_published=True,
         category__is_published=True,
         pub_date__lte=timezone.now()  
